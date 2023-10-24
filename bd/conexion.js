@@ -7,7 +7,7 @@ admin.initializeApp({
 
 var micuenta = admin.firestore();//conexion a la cuenta 
 
-var conexionUsuarios=micuenta.collection("usuarios1");//conexion a la bd 
+var conexionUsuarios=micuenta.collection("usuarios");//conexion a la bd 
 var conexionProductos=micuenta.collection("productos");//conexion a la bd 
 
 module.exports={

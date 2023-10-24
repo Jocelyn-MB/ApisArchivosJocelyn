@@ -7,7 +7,7 @@ ruta.get("/api/", async (req, res) => {
     if(usuarios.length > 0){
         res.status(200).json(usuarios)
     }else{
-        res.status(400).json("Usuarios no encontradosssss :(")
+        res.status(400).json("Usuarios no encontrados")
     }
 })
 
@@ -18,7 +18,7 @@ ruta.get("/nuevousuario",(req,res)=>{
 ruta.post("/api/nuevousuario",async (req,res)=>{
     var error= await nuevousuario(req.body);
     if(error==0){
-        res.status(200).json("Usuario registrado aesthetico")
+        res.status(200).json("Usuario insertado en la BD")
     }else{
         res.status(400).json("ERROR AL REGISTRAR USUARIO")
     }
@@ -37,18 +37,18 @@ ruta.post("/api/editarUsuario", async (req,res)=>{
     var error=  await modificarUsuario(req.body);
     //console.log("error");
     if(error==0){
-        res.status(200).json("Usuario  actualizado correctamentee")
+        res.status(200).json("Usuario  actualizado correctamente")
     }else{
-        res.status(400).json("error al actualizar el usuario")
+        res.status(400).json("Error al actualizar usuario")
     }
 });+
 
 ruta.get("/api/borrarUsuario/:id", async (req,res)=>{
     var error= await borrarUsuario(req.params.id);
     if(error==0){
-        res.status(200).json("Usuario borradooo, nice :V")
+        res.status(200).json("Usuario borrado")
     }else{
-        res.status(400).json("Error al borrar al usuario :(")
+        res.status(400).json("Error al borrar al usuario ")
     }
 });
 

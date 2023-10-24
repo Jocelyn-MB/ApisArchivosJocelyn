@@ -1,6 +1,7 @@
 var express=require("express");
 var path= require("path");
 var cors = require("cors");
+const session=require('express-session');
 var rutasUsuarios=require("./rutas/usuariosRutas"); 
 var rutasProductos=require ("./rutas/productosRutas");
 var rutasUsuariosApis=require("./rutas/usuariosRutasApis"); 
