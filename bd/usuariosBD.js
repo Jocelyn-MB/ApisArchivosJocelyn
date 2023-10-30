@@ -110,32 +110,22 @@ async function borrarUsuario(id){
  return error; 
 }
 
-async function identificarUsuario(datos) {
-  try {
-    if (!datos.usuario || !datos.password) {
-      return 1; // Si falta información, devuelve un valor de error
-    }
-    
-    const usuarios = await mostrarUsuarios(); // Obtener la lista de usuarios
-    const usuario = usuarios.find(user => user.usuario === datos.usuario);
-    
-    if (usuario) {
+async function loginUsuario(datos) {
+  var error = 1;
+  var users = await mostrarUsuarios();
+
+  var usuario = users.find(dato => dato.usuario === datos.usuario);
+  
+  if (usuario) {
+      // Comparamos la contraseña proporcionada con la contraseña almacenada después de aplicar el hash
       if (validarPassword(datos.password, usuario.salt, usuario.password)) {
-        console.log("Credenciales válidas");
-        return 0; // Credenciales válidas, devuelve éxito
-      } else {
-        console.log("Contraseña incorrecta");
-        return 2; // Contraseña incorrecta
+          error = 0;
       }
-    } else {
-      console.log("Usuario no encontrado");
-      return 3; // Usuario no encontrado
-    }
-  } catch (err) {
-    console.log("Error al recuperar el usuario " + err);
-    return 4; // Error al recuperar el usuario
   }
-};
+
+  return error;
+}
+
 
 module.exports = {
     mostrarUsuarios,
@@ -143,5 +133,5 @@ module.exports = {
     buscarPorId,
     modificarUsuario,
     borrarUsuario,
-    identificarUsuario
+    loginUsuario
 }

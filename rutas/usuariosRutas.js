@@ -2,14 +2,28 @@ var ruta = require("express").Router();
 var subirArchivo = require ("../middlewares/middlewares").subirArchivo;
 var fs = require("fs");
 var path= require("path");
-var {mostrarUsuarios, nuevousuario, buscarPorId, modificarUsuario,borrarUsuario,identificarUsuario } = require("../bd/usuariosBD");
-const { log } = require("console");
+//var {usuario,admin}=require ("../middlewares/passwords");
+var {mostrarUsuarios, nuevousuario, buscarPorId, modificarUsuario,borrarUsuario,loginUsuario } = require("../bd/usuariosBD");
 
-ruta.get("/", async (req, res) => {
+ruta.get("/",async (req, res) => {
     var users = await mostrarUsuarios();
-    //console.log(users);
     res.render("usuarios/mostrar", {users});
 })
+ruta.get("/login", (req, res) => {
+    res.render("usuarios/login");
+});
+ruta.post("/login", async (req, res) => {
+    var error=await loginUsuario(req.body);
+
+     console.log(error);
+     if(error == 1) {
+          res.redirect("/login")
+          console
+     } else if(error == 0){
+          res.redirect("/") 
+     }
+});
+ 
 ruta.get("/nuevousuario",(req,res)=>{
     res.render("usuarios/nuevo");
 }); 
@@ -74,38 +88,5 @@ ruta.get("/borrarUsuario/:id", async (req, res) => {
         console.error("Error al borrar usuario", error);
     }
 });
-ruta.get("/identificarUsuario", (req, res) => {
-    res.render("usuarios/login");
-});
 
-ruta.post("/identificarUsuario", async (req, res) => {
-    const error = await identificarUsuario(req.body);
-
-    if (error === 0) {
-        // Credenciales válidas, redirige a una página de bienvenida o a donde desees
-        res.redirect("/nuevousuario");
-    } else {
-        // Manejar errores según el código de error
-        if (error === 1) {
-            console.log("Falta información (usuario o contraseña)");
-        } else if (error === 2) {
-            console.log("Contraseña incorrecta");
-        } else if (error === 3) {
-            console.log("Usuario no encontrado");
-        } else if (error === 4) {
-            console.log("Error al recuperar el usuario");
-        }
-
-        // Redirige de nuevo al formulario de inicio de sesión con un mensaje de error
-        res.redirect("/identificarUsuario");
-    }
-});
-    /*var user= await identificarUsuario(req.params.usuario);
-    res.render("usuarios/login",{user});*/
-
-/*ruta.get("/",async(req,res)=>{
-    var user= await identificarUsuario(req.params.usuario);
-    res.render("usuarios/login",{user});
-});
-*/
 module.exports = ruta;

@@ -1,26 +1,29 @@
 <%- include("../templates/encabezado") %>
 <%- include("../templates/menu") %>
-<div class="container p-5 my-5 bg-dark text-white">
-    <form action="/identificarUsuario" method="post">
-        <div class="card">
-            <div class="card-header">
-                <h1>LOGIN</h1>
+<section class="position-relative py-3 py-xl-5">
+    
+            <div class="container p-5 py-xl-5 text-white">
+                <form  class="text-center" method="post">
+                    <div class="card col-md-8 col-xl-6 text-center mx-auto bg-dark border-light">
+                        <div class="card-header text-white">
+                            <h1>LOGIN</h1>
+                        </div>
+                        <div class="card-body bg-dark  ">
+                            <div class="form-group m-3">
+                                <input class="form-control" type="text" name="usuario" id="usuario" placeholder="Usuario" required>
+                            </div>
+                            <div class="form-group m-3">
+                                <input class="form-control" type="password" name="password" id="password" placeholder="Password" required>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-transparent my-2">
+                            <button class="btn btn-primary btn-block" type="submit">Login Now</button>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div class="card-body">
-                <div class="form-group">
-                    <input class="form-control" type="text" name="usuario" id="usuario" placeholder="Usuario" required>
-                </div>
-                <div class="form-group">
-                    <input class="form-control" type="text" name="password" id="password" placeholder="Password" required>
-                </div>
-            </div>
-            <div class="card-footer">
-                <button class="btn btn-primary btn-block" type="submit">Login Now</button>
-            </div>
-        </div>
-    </form>
-</div>
-
+     
+</section>
 
 
 

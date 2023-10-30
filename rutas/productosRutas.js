@@ -3,6 +3,7 @@ var subirArchivo = require ("../middlewares/middlewares").subirArchivo;
 var {mostrarProductos, nuevoProducto, buscarPorIdP, modificarProducto,borrarProducto} = require("../bd/productosBD");
 var fs = require("fs");
 var path= require("path");
+//var {usuario,admin}=require ("../middlewares/passwords");
 
 rutaP.get("/mostrarProductos", async (req, res) => {
     var prods = await mostrarProductos();

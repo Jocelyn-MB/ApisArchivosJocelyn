@@ -6,9 +6,13 @@ var rutasUsuarios=require("./rutas/usuariosRutas");
 var rutasProductos=require ("./rutas/productosRutas");
 var rutasUsuariosApis=require("./rutas/usuariosRutasApis"); 
 var rutasProductosApis = require ("./rutas/productosRutasApis");
+
+const bodyParser = require('body-parser');
 var app=express();
 
 require("dotenv").config();
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 app.set("view engine","ejs"); 
 app.use(cors())
 app.use(express.json()); 
